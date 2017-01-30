@@ -1,7 +1,7 @@
 /*
  * PWM0_EKE.c
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??ï¿½/??ï¿½/????
  *      Author: El-safi
  */
 #include "PWM0_EKE.h"
@@ -9,14 +9,15 @@
 
 void PWM0_EKE_init(void)
 {
-  TCCR0=(1<<WGM00)|(1<<WGM01)|(1<<CS01)|(1<<COM00)|(COM01); // FAST PWM ,INVERTING MODE, 8 PRESCALER
+  TCCR0=(1<<WGM00)|(1<<WGM01)|(1<<CS00)|(1<<CS02)|(1<<COM00)|(1<<COM01); // FAST PWM ,INVERTING MODE, 1024 PRESCALER
   TCCR0&=~(1<<FOC0);                                        // AS PWM mode must this bit to be zero
   TCNT0=0;                                                  // counter =0 at first
-  // stop interrupts for all modes and global interrupt
+ // stop interrupts for all modes and global interrupt
   TIMSK&=~(1<<OCIE0)|(1<<TOIE0);
   TIFR|=(1<<TOV0)|(1<<OCF0);
   SREG&=~(1<<7);
   DDRB|=(1<<PB3);
+
 
 }
 
